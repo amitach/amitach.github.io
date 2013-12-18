@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[HackaBlog]]></title>
-  <link href="http://amitach.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Ruby | HackaBlog]]></title>
+  <link href="http://amitach.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://amitach.github.io/"/>
   <updated>2013-12-19T01:52:16+05:30</updated>
   <id>http://amitach.github.io/</id>
@@ -82,8 +82,8 @@ You can put any code you want in a class definition.</p>
 <p>   end<br/>
  end<br/>
  a = Amit.new<br/>
- a.first  #=>  &ldquo;Amit&#8221;<br/>
- a.second #=>  &#8220;Acharya&rdquo;</p>
+ a.first  #=>  &ldquo;Amit"<br/>
+ a.second #=>  "Acharya&rdquo;</p>
 
 <p>When the class Amit comes into the picture for the first time, no class by that name exists yet. So, Ruby steps in and defines the class and the first method with it.</p>
 
