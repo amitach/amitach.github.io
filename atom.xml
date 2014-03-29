@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[HackaBlog]]></title>
+  <link href="http://amitach.github.io/atom.xml" rel="self"/>
+  <link href="http://amitach.github.io/"/>
+  <updated>2013-12-19T02:15:49+05:30</updated>
+  <id>http://amitach.github.io/</id>
+  <author>
+    <name><![CDATA[Amit Acharya]]></name>
+    <email><![CDATA[amitach@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MetaProgramming Ruby/Open Classes]]></title>
+    <link href="http://amitach.github.io/blog/2013/12/19/metaprogramming-ruby-slash-open-classes/"/>
+    <updated>2013-12-19T01:48:28+05:30</updated>
+    <id>http://amitach.github.io/blog/2013/12/19/metaprogramming-ruby-slash-open-classes</id>
+    <content type="html"><![CDATA[<p>Open Classes
+MetaProgramming using Ruby</p>
+
+<p>The Object Model:</p>
+
+<p>See any ruby program and you will see objects everywhere. It includes language constructs such as classes, modules, variables, instance variables , class variables, methods etc. All these constructs together make the object model each playing some role.</p>
+
+<p>With the help of object model we are able to associate objects to classes or methods to classes and many many such questions. So lets dive into the first concept of metaprogramming using Ruby.</p>
+
+<p>1) Open Classes:</p>
+
+<p>Monkeypatching is not adviced.</p>
+
+<p> class String</p>
+
+<pre><code>  def wow  
+       "This is amazing ain't it"  
+  end  
+</code></pre>
+
+<p> end</p>
+
+<p>We opened the String class and we plant the wow method there which returns the text &ldquo;This is amazing ain&rsquo;t it&rdquo;</p>
+
+<p>Once you do this, every string in the system will be exposed to the wow method.</p>
+
+<p>Similarly you can open any class and add methods to it and it will be available to all the instances of that class.</p>
+
+<p>The example above doesn&rsquo;t really make sense here but it shows the power of ruby wherein you can open any class and add methods to it as you desire</p>
+
+<p>2) Inside Class definitions:</p>
+
+<p> 3.times do</p>
+
+<pre><code>  class C  
+       puts "Wow"  
+  end  
+</code></pre>
+
+<p> end</p>
+
+<p>In Ruby there is no real distinction between code that defines a class and code of any other kind.
+You can put any code you want in a class definition.</p>
+
+<p>Above code will execute the code inside do&hellip;end block will be executed thrice but does that mean it defines class C three times?</p>
+
+<p>Lets see another example:
+ Class Amit<br/>
+   def first</p>
+
+<pre><code> puts "Amit"  
+</code></pre>
+
+<p>   end<br/>
+ end<br/>
+ Class Amit <br/>
+   def second</p>
+
+<pre><code> puts "Acharya"  
+</code></pre>
+
+<p>   end<br/>
+ end<br/>
+ a = Amit.new<br/>
+ a.first  #=>  &ldquo;Amit&#8221;<br/>
+ a.second #=>  &#8220;Acharya&rdquo;</p>
+
+<p>When the class Amit comes into the picture for the first time, no class by that name exists yet. So, Ruby steps in and defines the class and the first method with it.</p>
+
+<p>In the second Definition of class Amit, the Class already exists, so Ruby doesn&rsquo;t need to define the class again, As learned earlier, it uses Open Classes concept to open the method and define the second method insice class Amit.</p>
+
+<p>The core job of the class keyword is to give you the context of the class where you can define methods.</p>
+
+<p>3) Real life example of Open Class</p>
+
+<p>You can convert any number to Money object by calling Numeric#to_money()</p>
+
+<p>amount = 100.to_money()</p>
+
+<p>so to_money methods has to be defined in the Numeric class (100&rsquo;s class)</p>
+
+<p>Following is the snippet from the money gem where in it opens the Numeric Class and adds the to_money method, similary you can find the same in the String class so you can do &ldquo;100&rdquo;.to_money()</p>
+
+<p>1:  # Open +Numeric+ to add new method.<br/>
+2:  class Numeric<br/>
+3:   # Converts this numeric into a +Money+ object in the given +currency+.<br/>
+4:   #<br/>
+5:   # @param [Currency, String, Symbol] currency<br/>
+6:   #  The currency to set the resulting +Money+ object to.<br/>
+7:   #<br/>
+8:   # @return [Money]<br/>
+9:   #<br/>
+10:   # @example<br/>
+11:   #  100.to_money          #=> #<Money @cents=10000><br/>
+12:   #  100.37.to_money        #=> #<Money @cents=10037><br/>
+13:   #  BigDecimal.new(&lsquo;100&rsquo;).to_money #=> #<Money @cents=10000><br/>
+14:   #<br/>
+15:   # @see Money.from_numeric<br/>
+16:   #<br/>
+17:   def to_money(currency = nil)<br/>
+18:    Money.from_numeric(self, currency || Money.default_currency)<br/>
+19:   end<br/>
+20:  end</p>
+
+<p>4) Problem with Open Classes
+It is very easy to accidentally overwrite an existing method definition and that could cause nasty bugs,
+e.g. if you replace the String#length() with your own version of length(), that could cause unwanted bugs in the system.</p>
+]]></content>
+  </entry>
+  
+</feed>

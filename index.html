@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>HackaBlog</title>
+  <meta name="author" content="Amit Acharya">
+
+  
+  <meta name="description" content="Open Classes
+MetaProgramming using Ruby The Object Model: See any ruby program and you will see objects everywhere. It includes language constructs &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://amitach.github.io">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="HackaBlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">HackaBlog</a></h1>
+  
+    <h2>Blogs for developers/hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:amitach.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/19/metaprogramming-ruby-slash-open-classes/">MetaProgramming Ruby/Open Classes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-19T01:48:28+05:30" pubdate data-updated="true">Dec 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Open Classes
+MetaProgramming using Ruby</p>
+
+<p>The Object Model:</p>
+
+<p>See any ruby program and you will see objects everywhere. It includes language constructs such as classes, modules, variables, instance variables , class variables, methods etc. All these constructs together make the object model each playing some role.</p>
+
+<p>With the help of object model we are able to associate objects to classes or methods to classes and many many such questions. So lets dive into the first concept of metaprogramming using Ruby.</p>
+
+<p>1) Open Classes:</p>
+
+<p>Monkeypatching is not adviced.</p>
+
+<p> class String</p>
+
+<pre><code>  def wow  
+       "This is amazing ain't it"  
+  end  
+</code></pre>
+
+<p> end</p>
+
+<p>We opened the String class and we plant the wow method there which returns the text &ldquo;This is amazing ain&rsquo;t it&rdquo;</p>
+
+<p>Once you do this, every string in the system will be exposed to the wow method.</p>
+
+<p>Similarly you can open any class and add methods to it and it will be available to all the instances of that class.</p>
+
+<p>The example above doesn&rsquo;t really make sense here but it shows the power of ruby wherein you can open any class and add methods to it as you desire</p>
+
+<p>2) Inside Class definitions:</p>
+
+<p> 3.times do</p>
+
+<pre><code>  class C  
+       puts "Wow"  
+  end  
+</code></pre>
+
+<p> end</p>
+
+<p>In Ruby there is no real distinction between code that defines a class and code of any other kind.
+You can put any code you want in a class definition.</p>
+
+<p>Above code will execute the code inside do&hellip;end block will be executed thrice but does that mean it defines class C three times?</p>
+
+<p>Lets see another example:
+ Class Amit<br/>
+   def first</p>
+
+<pre><code> puts "Amit"  
+</code></pre>
+
+<p>   end<br/>
+ end<br/>
+ Class Amit <br/>
+   def second</p>
+
+<pre><code> puts "Acharya"  
+</code></pre>
+
+<p>   end<br/>
+ end<br/>
+ a = Amit.new<br/>
+ a.first  #=>  &ldquo;Amit&#8221;<br/>
+ a.second #=>  &#8220;Acharya&rdquo;</p>
+
+<p>When the class Amit comes into the picture for the first time, no class by that name exists yet. So, Ruby steps in and defines the class and the first method with it.</p>
+
+<p>In the second Definition of class Amit, the Class already exists, so Ruby doesn&rsquo;t need to define the class again, As learned earlier, it uses Open Classes concept to open the method and define the second method insice class Amit.</p>
+
+<p>The core job of the class keyword is to give you the context of the class where you can define methods.</p>
+
+<p>3) Real life example of Open Class</p>
+
+<p>You can convert any number to Money object by calling Numeric#to_money()</p>
+
+<p>amount = 100.to_money()</p>
+
+<p>so to_money methods has to be defined in the Numeric class (100&rsquo;s class)</p>
+
+<p>Following is the snippet from the money gem where in it opens the Numeric Class and adds the to_money method, similary you can find the same in the String class so you can do &ldquo;100&rdquo;.to_money()</p>
+
+<p>1:  # Open +Numeric+ to add new method.<br/>
+2:  class Numeric<br/>
+3:   # Converts this numeric into a +Money+ object in the given +currency+.<br/>
+4:   #<br/>
+5:   # @param [Currency, String, Symbol] currency<br/>
+6:   #  The currency to set the resulting +Money+ object to.<br/>
+7:   #<br/>
+8:   # @return [Money]<br/>
+9:   #<br/>
+10:   # @example<br/>
+11:   #  100.to_money          #=> #<Money @cents=10000><br/>
+12:   #  100.37.to_money        #=> #<Money @cents=10037><br/>
+13:   #  BigDecimal.new(&lsquo;100&rsquo;).to_money #=> #<Money @cents=10000><br/>
+14:   #<br/>
+15:   # @see Money.from_numeric<br/>
+16:   #<br/>
+17:   def to_money(currency = nil)<br/>
+18:    Money.from_numeric(self, currency || Money.default_currency)<br/>
+19:   end<br/>
+20:  end</p>
+
+<p>4) Problem with Open Classes
+It is very easy to accidentally overwrite an existing method definition and that could cause nasty bugs,
+e.g. if you replace the String#length() with your own version of length(), that could cause unwanted bugs in the system.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/12/19/metaprogramming-ruby-slash-open-classes/">MetaProgramming Ruby/Open Classes</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/amitach">@amitach</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'amitach',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/106863171111963672191?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+<section>
+  <h1>About Me</h1>
+  <div id="twitter-profile" style="margin-top:0.5em;">
+    <p>
+      <strong>Amit Acharya</strong> 
+      (<a href="http://twitter.com/acharyaamit">@acharyaamit</a>)
+    </p>
+    <p>Technical blogs</p>
+  </div>
+  <script type="text/javascript">
+    $(function(){
+        var container = $('#twitter-profile'),
+            user = "acharyaamit";
+        
+        function parseTwLinks(s) {
+          var twUrl = "http://www.twitter.com/"
+          s = s.replace(/ (@([\w]+))/g, function(match, p1, p2) {
+              return " <a href='"+twUrl+p2+"'>"+p1+"</a>"
+          }).replace(/ (#([\w]+))/g, function(match, p1, p2) {
+              return " <a href='"+twUrl+"#!/search?q=%23"+p2+"'>"+p1+"</a>"
+          })
+          return s
+        }
+
+        $.ajax({
+            url: "http://api.twitter.com/1/users/show.json?include_entities=false&screen_name="+user+"&callback=?"
+          , type: 'GET'
+          , dataType: 'jsonp'
+          , error: function (err) { $('#twitter-profile').addClass('error');  }
+          , success: function(data) {
+              container.html('<img class="left" src="http://api.twitter.com/1/users/profile_image/'+user+'.json?size=bigger" alt="@'+user+'"><p><strong>'+data.name+'</strong> (<a href="http://twitter.com/'+user+'">@'+user+'</a>)<br/>'+data.location+'</p><p>'+parseTwLinks(data.description)+'</p>');
+            }
+        })
+      });
+  </script>
+</section>
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Amit Acharya -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
