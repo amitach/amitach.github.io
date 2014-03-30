@@ -1,24 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Amit Acharya Technical Blog]]></title>
-  <link href="http://amitach.github.io/atom.xml" rel="self"/>
-  <link href="http://amitach.github.io/"/>
-  <updated>2014-03-30T15:17:42+05:30</updated>
-  <id>http://amitach.github.io/</id>
-  <author>
-    <name><![CDATA[Amit Acharya]]></name>
-    <email><![CDATA[amitach@gmail.com]]></email>
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Metaprogramming Ruby: Understanding Ruby Self - Amit Acharya Technical Blog</title>
+  <meta name="author" content="Amit Acharya">
 
   
-  <entry>
-    <title type="html"><![CDATA[Metaprogramming Ruby: Understanding Ruby Self]]></title>
-    <link href="http://amitach.github.io/blog/2014/03/30/metaprogramming-ruby-understanding-ruby-self/"/>
-    <updated>2014-03-30T03:33:42+05:30</updated>
-    <id>http://amitach.github.io/blog/2014/03/30/metaprogramming-ruby-understanding-ruby-self</id>
-    <content type="html"><![CDATA[<h1>Self</h1>
+  <meta name="description" content="Self With respect to an object Every line of Ruby code is executed inside an object the so called current object. The current object is also known as &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://amitach.github.io/blog/2014/03/30/metaprogramming-ruby-understanding-ruby-self">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Amit Acharya Technical Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Amit Acharya Technical Blog</a></h1>
+  
+    <h2>Concern for man and his fate must always form the chief interest of all technical endeavors. Never forget this in the midst of your diagrams and equations --Albert Einstein</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:amitach.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Metaprogramming Ruby: Understanding Ruby Self</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-30T03:33:42+05:30" pubdate data-updated="true">Mar 30<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://amitach.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>Self</h1>
 
 
 <h4>With respect to an object</h4>
@@ -187,129 +263,195 @@ call. However, in a class or module definition (and outside of any method), the 
 
 <p>With the above concepts in mind we can build on and understand when exactly self is to be used and what does it refer to. There are many concepts which are built on the understanding of self like class_eval, class methods etc. We will look at them soon
 </p></p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[Metaprogramming in Ruby: What Is There in an Object]]></title>
-    <link href="http://amitach.github.io/blog/2014/03/30/metaprogramming-in-ruby-what-is-there-in-an-object/"/>
-    <updated>2014-03-30T01:33:08+05:30</updated>
-    <id>http://amitach.github.io/blog/2014/03/30/metaprogramming-in-ruby-what-is-there-in-an-object</id>
-    <content type="html"><![CDATA[<p>Before we dive into details of Metaprogramming lets first see what is really there in an Object,
-observe the following piece of code.</p>
 
-<figure class='code'><figcaption><span>A simple object with an instance variable </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="k">class</span> <span class="nc">A</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">method</span>
-</span><span class='line'>   <span class="vi">@v</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'> <span class="k">end</span>
-</span><span class='line'> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'> <span class="n">a</span><span class="o">.</span><span class="n">class</span> <span class="c1"># =&gt; A</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class="byline author vcard">Posted by <span class="fn">Amit Acharya</span></span>
+
+      
 
 
-<p>
-    The above piece of code primarily has three things
-    <ol style="margin-left:30px">
-        <li>Instance Variable</li>
-        <li>Method</li>
-        <li>Class</li>
-    </ol>
-    <strong>Let&#8217;s look at each one of them closely now</strong>
-    <ul style="margin-left:30px">
-        <li><h4>Instance Variable:</h4>
-            An instance variable has a name beginning with @ and its scope is confined to whatever object self refers to.
-            <p> Objects contain instance variables, Ruby provides a method <span class ="quotes" > Object#instance_variables()</span> to peek at them.
-            In the above example we have just one instance variable</p>
-<figure class='code'><figcaption><span>Instance Variables for the above piece of code </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">a</span><span class="o">.</span><span class="n">method</span>
-</span><span class='line'> <span class="n">a</span><span class="o">.</span><span class="n">instance_variables</span> <span class="c1"># =&gt; [:@v] </span>
-</span></code></pre></td></tr></table></div></figure>
-        <p>Unlike in static languages like Java, in Ruby there is no connection between an object&#8217;s class and its instance variables.
-Instance Variables come into existence whenever you assign them a value. Important thing to understand is that you can have objects of the <span class='quotes'>&#8220;same&#8221;</span> class that carry different sets of instance variables</p>
 
-Look at the following code
-<figure class='code'><figcaption><span>Different instance variables per object</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="k">class</span> <span class="nc">A</span>
-</span><span class='line'>   <span class="k">def</span> <span class="nf">method</span>
-</span><span class='line'>     <span class="vi">@v</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span class='line'>   <span class="k">end</span>
-</span><span class='line'>   <span class="k">def</span> <span class="nf">new_method</span>
-</span><span class='line'>     <span class="vi">@c</span> <span class="o">=</span> <span class="mi">2</span>
-</span><span class='line'>   <span class="k">end</span>
-</span><span class='line'> <span class="k">end</span>
-</span><span class='line'> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'> <span class="n">a</span><span class="o">.</span><span class="n">method</span>
-</span><span class='line'> <span class="n">a</span><span class="o">.</span><span class="n">instance_variables</span> <span class="c1">#=&gt; [:@v]  </span>
-</span><span class='line'> <span class="n">b</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'> <span class="n">b</span><span class="o">.</span><span class="n">new_method</span>
-</span><span class='line'> <span class="n">b</span><span class="o">.</span><span class="n">instance_variables</span> <span class="c1">#=&gt; [:@c]  </span>
-</span></code></pre></td></tr></table></div></figure>
-Observe that if we hadn&#8217;t called <span class='quotes'>a.method()</span> or <span class='quotes'> b.new_method() </span> objects a or b would not have any instance variables.
-That gives a basic idea of what instance variables are. Now let&#8217;s move onto methods.
-        </li>
-        <br/>
-        <li><h4>Method:</h4>
-            Besides having instance variables objects have methods
 
-You can see an objects methods by calling <span class="quotes">Object#methods()</span>. Most of the methods will be the methods inherited from Object so this list of methods will be quite long.
 
-We can use <span class="quotes"> Array#grep()</span> to find the method we are looking for
 
-<figure class='code'><figcaption><span>Objects have methods and can be searched using grep</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">a</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/new_/</span><span class="p">)</span> <span class="c1">#=&gt; [:new_method] </span>
-</span></code></pre></td></tr></table></div></figure>
-Methods are analogous to functions in C or methods in Java so let&#8217;s not deep dive into them.
 
-        </li>
-        <br/>
-        <li><h4>Class:</h4>
-Yes, classes are nothing but objects in ruby and since a class is an object, everything that applies to an object also applies to a class.
 
-Classes like any object have their own class, called <span class="quotes"> Class </span>
-<br/>
-<ul>
-<li>The method of an object are the instance methods of its class.</li> 
-<li>Methods of a class are the instance methods of <span class="quotes"> Class</span>.</li>
-</ul>
-<br/>
-Read that again
-<br/>
-<br/>
-Following is an example that shows that String&#8217;s class is Class
-<figure class='code'><figcaption><span>String&#8217;s class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">head</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="nb">String</span><span class="o">.</span><span class="n">class</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="no">Class</span>
-</span></code></pre></td></tr></table></div></figure>
-        </li>
-    </ul>
+  
 
-That should clear the basics of what all an object has. Next post will be about the object model.
+
+<time datetime="2014-03-30T03:33:42+05:30" pubdate data-updated="true">Mar 30<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/ruby-metaprogramming/'>Ruby metaprogramming</a>, <a class='category' href='/blog/categories/understanding-ruby-self/'>Understanding ruby self</a>, <a class='category' href='/blog/categories/self-in-ruby/'>self in ruby</a>, <a class='category' href='/blog/categories/what-is-self-in-ruby/'>what is self in ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://amitach.github.io/blog/2014/03/30/metaprogramming-ruby-understanding-ruby-self/" data-via="acharyaamit" data-counturl="http://amitach.github.io/blog/2014/03/30/metaprogramming-ruby-understanding-ruby-self/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/30/metaprogramming-in-ruby-what-is-there-in-an-object/" title="Previous Post: Metaprogramming in Ruby: What is there in an Object">&laquo; Metaprogramming in Ruby: What is there in an Object</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/30/metaprogramming-ruby-understanding-ruby-self/">Metaprogramming Ruby: Understanding Ruby Self</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/30/metaprogramming-in-ruby-what-is-there-in-an-object/">Metaprogramming in Ruby: What Is There in an Object</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/amitach">@amitach</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'amitach',
+            count: 10,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/amitach?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Amit Acharya -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
-]]></content>
-  </entry>
+</footer>
   
-</feed>
+
+<script type="text/javascript">
+      var disqus_shortname = 'amitacharya';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://amitach.github.io/blog/2014/03/30/metaprogramming-ruby-understanding-ruby-self/';
+        var disqus_url = 'http://amitach.github.io/blog/2014/03/30/metaprogramming-ruby-understanding-ruby-self/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
