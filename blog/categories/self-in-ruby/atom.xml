@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Self in Ruby | Amit Acharya Technical Blog]]></title>
   <link href="http://amitach.github.io/blog/categories/self-in-ruby/atom.xml" rel="self"/>
   <link href="http://amitach.github.io/"/>
-  <updated>2014-03-30T15:17:42+05:30</updated>
+  <updated>2014-03-30T15:21:36+05:30</updated>
   <id>http://amitach.github.io/</id>
   <author>
     <name><![CDATA[Amit Acharya]]></name>
@@ -26,138 +26,120 @@
 
 
 
-<p><p>
+<p>
 Every line of Ruby code is executed inside an object the so called current object. The current object is also known as self, because you can
-access it with the self keyword.Only one object can take the role of self at a given time, but no object holds that role for a long time. In particular, when you call a method, the receiver becomes self. From that moment on, all instance variables are instance variables of self, and all methods called without an explicit receiver are called on self. As soon as your code explicitly calls a method on some other object, that other object becomes self.</p>
+access it with the self keyword.Only one object can take the role of self at a given time, but no object holds that role for a long time. In particular, when you call a method, the receiver becomes self. From that moment on, all instance variables are instance variables of self, and all methods called without an explicit receiver are called on self. As soon as your code explicitly calls a method on some other object, that other object becomes self.
 
-<p>``` ruby self in Ruby
-class FooBaar</p>
+``` ruby self in Ruby
+class FooBaar
+    def foo
+        puts "#{self.inspect} 1"
+        @a = "hello"
+        bar() # Same as self.my_method()
+        puts "#{self.inspect} 2"
+        self
+    end
 
-<pre><code>def foo
-    puts "#{self.inspect} 1"
-    @a = "hello"
-    bar() # Same as self.my_method()
-    puts "#{self.inspect} 2"
-    self
+    def bar
+        puts "#{self.inspect} 3"
+        @a = @a + " world"
+        puts "#{self.inspect} 4"
+    end
 end
-
-def bar
-    puts "#{self.inspect} 3"
-    @a = @a + " world"
-    puts "#{self.inspect} 4"
-end
-</code></pre>
-
-<p>end
- #Let&rsquo;s do the following things on irb and observe, the code above was pasted to irb
+ #Let's do the following things on irb and observe, the code above was pasted to irb
 head :072 > self
- => main
+ => main 
 head :073 > obj = FooBaar.new
- => #&lt;FooBaar:0x00000001b787d8>
-head :074 > obj.foo</p>
-
-<h1>&lt;FooBaar:0x00000001b787d8> 1</h1>
-
-<h1>&lt;FooBaar:0x00000001b787d8 @a=&ldquo;hello&rdquo;> 3</h1>
-
-<h1>&lt;FooBaar:0x00000001b787d8 @a=&ldquo;hello world&rdquo;> 4</h1>
-
-<h1>&lt;FooBaar:0x00000001b787d8 @a=&ldquo;hello world&rdquo;> 2</h1>
-
-<p> => #&lt;FooBaar:0x00000001b787d8 @a=&ldquo;hello world&rdquo;>
+ => #<FooBaar:0x00000001b787d8> 
+head :074 > obj.foo 
+#<FooBaar:0x00000001b787d8> 1
+#<FooBaar:0x00000001b787d8 @a="hello"> 3
+#<FooBaar:0x00000001b787d8 @a="hello world"> 4
+#<FooBaar:0x00000001b787d8 @a="hello world"> 2
+ => #<FooBaar:0x00000001b787d8 @a="hello world"> 
 head :075 > self
- => main</p>
+ => main 
 
-<p>```</p>
+```
 
-<p>Let&rsquo;s dissect it now. Following things have to be observed
+Let's dissect it now. Following things have to be observed
 <br/>
 <br/>
-<ul>
-<blockquote></p>
-
-<pre><code>Outside the context of any class/module etc. self always refers to an object called as &lt;strong&gt;main&lt;/strong&gt; created by Ruby for us
-</code></pre>
-
-<p></blockquote>
-<blockquote></p>
-
-<pre><code>As soon as you call method foo, the receiver obj becomes self &lt;p&gt;&lt;span class="quotes"&gt;(#FooBaar:0x00000001b787d8 1 )&lt;/span&gt;.
-</code></pre>
-
-<p></blockquote>
+<ul> 
+<blockquote>
+    Outside the context of any class/module etc. self always refers to an object called as main created by Ruby for us
+</blockquote>
+<blockquote>
+    As soon as you call method foo, the receiver obj becomes self (#FooBaar:0x00000001b787d8 1 ).
+</blockquote>
 <blockquote>
   Because of that, the instance variable @a is an instance variable of obj, and the
 method bar( ) is called on obj( ).
 </blockquote>
- <blockquote>&ndash; As bar() is executed, obj is still self <span class="quotes">(#FooBaar:0x00000001b787d8 3 )</span> (observe the 3 got printed), so @a is still an instance variable of obj.</blockquote>
+ <blockquote>- As bar() is executed, obj is still self <span class="quotes">(#FooBaar:0x00000001b787d8 3 )</span> (observe the 3 got printed), so @a is still an instance variable of obj.</blockquote>
  <blockquote>
-  Finally, foo( ) returns a reference to self<span class="quotes">(#FooBaar:0x00000001b787d8 @a=&ldquo;hello world&rdquo; )</span> and as expected the final value of the instance variable @a is &ldquo;hello world&rdquo;.
+  Finally, foo( ) returns a reference to self<span class="quotes">(#FooBaar:0x00000001b787d8 @a="hello world" )</span> and as expected the final value of the instance variable @a is "hello world".
  </blockquote>
 <blockquote>  At the end the self is <strong>main</strong> again outside the scope of obj </blockquote>
 </ul>
-</p></p>
+</p>
 
-<p><h1>Self</h1> <h4> With respect to classes and modules</h4>
+
+
+
+<h1>Self</h1>
+
+
+<p> <h4> With respect to classes and modules</h4></p>
+
 <p>
 Usually the role of self is taken by the last object who received a method
-call. However, in a class or module definition (and outside of any method), the role of self is taken by the class or module</p>
+call. However, in a class or module definition (and outside of any method), the role of self is taken by the class or module
 
-<p>``` ruby self in classes/modules
-result = class MyClass</p>
+``` ruby self in classes/modules
+result = class MyClass
+    self
+end
+result # => MyClass
 
-<pre><code>self
-</code></pre>
+```
 
-<p>end
-result # => MyClass</p>
-
-<p>```</p>
-
-<p>Let&rsquo;s look at one more example
+Let's look at one more example
 ``` ruby ruby classes are objects
-class Foo</p>
-
-<pre><code>@a = 1
-def self.read
-    @a
+class Foo
+    @a = 1
+    def self.read
+        @a
+    end
+    def write 
+        @a = 2
+    end
+    def read
+        @a
+    end
 end
-def write 
-    @a = 2
-end
-def read
-    @a
-end
-</code></pre>
 
-<p>end</p>
-
-<p>obj = Foo.new
+obj = Foo.new
 obj.write
 obj.read # => 2
-Foo.read # => 1</p>
+Foo.read # => 1
 
-<p>```</p>
+```
 
-<p>As we can see the previous code defines two instance variables. Both @a but they are defined in different scopes and they belong to different objects
+As we can see the previous code defines two instance variables. Both @a but they are defined in different scopes and they belong to different objects
 <br/><br/>
 <ul>
-<blockquote></p>
+<blockquote>
+    One @a is defined with obj as self, so it's an instance variable of obj object
+</blockquote>
+<blockquote>
+    The other @a is defined with Foo as self, so it's an instance variable of the Foo Object (Remember classes are nothing but objects in Ruby) 
+</blockquote>
+</ul>
 
-<pre><code>One @a is defined with obj as self, so it's an instance variable of obj object
-</code></pre>
+With the above concepts in mind we can build on and understand when exactly self is to be used and what does it refer to. There are many concepts which are built on the understanding of self like class_eval, class methods etc. We will look at them soon
+</p>
 
-<p></blockquote>
-<blockquote></p>
-
-<pre><code>The other @a is defined with Foo as self, so it's an instance variable of the Foo Object (Remember classes are nothing but objects in Ruby) 
-</code></pre>
-
-<p></blockquote>
-</ul></p>
-
-<p>With the above concepts in mind we can build on and understand when exactly self is to be used and what does it refer to. There are many concepts which are built on the understanding of self like class_eval, class methods etc. We will look at them soon
-</p></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Amit Acharya Technical Blog]]></title>
   <link href="http://amitach.github.io/atom.xml" rel="self"/>
   <link href="http://amitach.github.io/"/>
-  <updated>2014-03-30T15:17:42+05:30</updated>
+  <updated>2014-03-30T15:21:36+05:30</updated>
   <id>http://amitach.github.io/</id>
   <author>
     <name><![CDATA[Amit Acharya]]></name>
@@ -26,11 +26,11 @@
 
 
 
-<p><p>
+<p>
 Every line of Ruby code is executed inside an object the so called current object. The current object is also known as self, because you can
-access it with the self keyword.Only one object can take the role of self at a given time, but no object holds that role for a long time. In particular, when you call a method, the receiver becomes self. From that moment on, all instance variables are instance variables of self, and all methods called without an explicit receiver are called on self. As soon as your code explicitly calls a method on some other object, that other object becomes self.</p>
+access it with the self keyword.Only one object can take the role of self at a given time, but no object holds that role for a long time. In particular, when you call a method, the receiver becomes self. From that moment on, all instance variables are instance variables of self, and all methods called without an explicit receiver are called on self. As soon as your code explicitly calls a method on some other object, that other object becomes self.
 
-<p><figure class='code'><figcaption><span>self in Ruby</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>self in Ruby</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -86,42 +86,43 @@ access it with the self keyword.Only one object can take the role of self at a g
 </span><span class='line'> <span class="o">=&gt;</span> <span class="c1">#&lt;FooBaar:0x00000001b787d8 @a=&quot;hello world&quot;&gt; </span>
 </span><span class='line'><span class="n">head</span> <span class="p">:</span><span class="mo">075</span> <span class="o">&gt;</span> <span class="nb">self</span>
 </span><span class='line'> <span class="o">=&gt;</span> <span class="n">main</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Let&rsquo;s dissect it now. Following things have to be observed
+Let&#8217;s dissect it now. Following things have to be observed
 <br/>
 <br/>
-<ul>
-<blockquote></p>
-
-<pre><code>Outside the context of any class/module etc. self always refers to an object called as &lt;strong&gt;main&lt;/strong&gt; created by Ruby for us
-</code></pre>
-
-<p></blockquote>
-<blockquote></p>
-
-<pre><code>As soon as you call method foo, the receiver obj becomes self &lt;p&gt;&lt;span class="quotes"&gt;(#FooBaar:0x00000001b787d8 1 )&lt;/span&gt;.
-</code></pre>
-
-<p></blockquote>
+<ul> 
+<blockquote>
+    Outside the context of any class/module etc. self always refers to an object called as main created by Ruby for us
+</blockquote>
+<blockquote>
+    As soon as you call method foo, the receiver obj becomes self (#FooBaar:0x00000001b787d8 1 ).
+</blockquote>
 <blockquote>
   Because of that, the instance variable @a is an instance variable of obj, and the
 method bar( ) is called on obj( ).
 </blockquote>
- <blockquote>&ndash; As bar() is executed, obj is still self <span class="quotes">(#FooBaar:0x00000001b787d8 3 )</span> (observe the 3 got printed), so @a is still an instance variable of obj.</blockquote>
+ <blockquote>- As bar() is executed, obj is still self <span class="quotes">(#FooBaar:0x00000001b787d8 3 )</span> (observe the 3 got printed), so @a is still an instance variable of obj.</blockquote>
  <blockquote>
-  Finally, foo( ) returns a reference to self<span class="quotes">(#FooBaar:0x00000001b787d8 @a=&ldquo;hello world&rdquo; )</span> and as expected the final value of the instance variable @a is &ldquo;hello world&rdquo;.
+  Finally, foo( ) returns a reference to self<span class="quotes">(#FooBaar:0x00000001b787d8 @a=&#8221;hello world&#8221; )</span> and as expected the final value of the instance variable @a is &#8220;hello world&#8221;.
  </blockquote>
 <blockquote>  At the end the self is <strong>main</strong> again outside the scope of obj </blockquote>
 </ul>
-</p></p>
+</p>
 
-<p><h1>Self</h1> <h4> With respect to classes and modules</h4>
+
+
+
+<h1>Self</h1>
+
+
+<p> <h4> With respect to classes and modules</h4></p>
+
 <p>
 Usually the role of self is taken by the last object who received a method
-call. However, in a class or module definition (and outside of any method), the role of self is taken by the class or module</p>
+call. However, in a class or module definition (and outside of any method), the role of self is taken by the class or module
 
-<p><figure class='code'><figcaption><span>self in classes/modules</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>self in classes/modules</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -129,9 +130,9 @@ call. However, in a class or module definition (and outside of any method), the 
 </span><span class='line'>    <span class="nb">self</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'><span class="n">result</span> <span class="c1"># =&gt; MyClass</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Let&rsquo;s look at one more example
+Let&#8217;s look at one more example
 <figure class='code'><figcaption><span>ruby classes are objects</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -166,27 +167,22 @@ call. However, in a class or module definition (and outside of any method), the 
 </span><span class='line'><span class="n">obj</span><span class="o">.</span><span class="n">write</span>
 </span><span class='line'><span class="n">obj</span><span class="o">.</span><span class="n">read</span> <span class="c1"># =&gt; 2</span>
 </span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">read</span> <span class="c1"># =&gt; 1</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>As we can see the previous code defines two instance variables. Both @a but they are defined in different scopes and they belong to different objects
+As we can see the previous code defines two instance variables. Both @a but they are defined in different scopes and they belong to different objects
 <br/><br/>
 <ul>
-<blockquote></p>
+<blockquote>
+    One @a is defined with obj as self, so it&#8217;s an instance variable of obj object
+</blockquote>
+<blockquote>
+    The other @a is defined with Foo as self, so it&#8217;s an instance variable of the Foo Object (Remember classes are nothing but objects in Ruby) 
+</blockquote>
+</ul>
 
-<pre><code>One @a is defined with obj as self, so it's an instance variable of obj object
-</code></pre>
+With the above concepts in mind we can build on and understand when exactly self is to be used and what does it refer to. There are many concepts which are built on the understanding of self like class_eval, class methods etc. We will look at them soon
+</p>
 
-<p></blockquote>
-<blockquote></p>
-
-<pre><code>The other @a is defined with Foo as self, so it's an instance variable of the Foo Object (Remember classes are nothing but objects in Ruby) 
-</code></pre>
-
-<p></blockquote>
-</ul></p>
-
-<p>With the above concepts in mind we can build on and understand when exactly self is to be used and what does it refer to. There are many concepts which are built on the understanding of self like class_eval, class methods etc. We will look at them soon
-</p></p>
 ]]></content>
   </entry>
   
