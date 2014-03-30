@@ -1,0 +1,117 @@
+---
+layout: post
+title: "Metaprogramming Ruby: Understanding Ruby self"
+date: 2014-03-30 03:33:42 +0530
+comments: true
+categories: [Ruby, Ruby metaprogramming, self in ruby, Understanding ruby self, what is self in ruby] 
+---
+<h1>Self</h1>
+<h4>With respect to an object</h4>
+
+<p>
+Every line of Ruby code is executed inside an object the so called current object. The current object is also known as self, because you can
+access it with the self keyword.Only one object can take the role of self at a given time, but no object holds that role for a long time. In particular, when you call a method, the receiver becomes self. From that moment on, all instance variables are instance variables of self, and all methods called without an explicit receiver are called on self. As soon as your code explicitly calls a method on some other object, that other object becomes self.
+
+``` ruby self in Ruby
+class FooBaar
+    def foo
+        puts "#{self.inspect} 1"
+        @a = "hello"
+        bar() # Same as self.my_method()
+        puts "#{self.inspect} 2"
+        self
+    end
+
+    def bar
+        puts "#{self.inspect} 3"
+        @a = @a + " world"
+        puts "#{self.inspect} 4"
+    end
+end
+ #Let's do the following things on irb and observe, the code above was pasted to irb
+head :072 > self
+ => main 
+head :073 > obj = FooBaar.new
+ => #<FooBaar:0x00000001b787d8> 
+head :074 > obj.foo 
+#<FooBaar:0x00000001b787d8> 1
+#<FooBaar:0x00000001b787d8 @a="hello"> 3
+#<FooBaar:0x00000001b787d8 @a="hello world"> 4
+#<FooBaar:0x00000001b787d8 @a="hello world"> 2
+ => #<FooBaar:0x00000001b787d8 @a="hello world"> 
+head :075 > self
+ => main 
+
+```
+
+Let's dissect it now. Following things have to be observed
+<br/>
+<br/>
+<ul> 
+<blockquote>
+    Outside the context of any class/module etc. self always refers to an object called as <strong>main</strong> created by Ruby for us
+</blockquote>
+<blockquote>
+    As soon as you call method foo, the receiver obj becomes self <p><span class="quotes">(#FooBaar:0x00000001b787d8 1 )</span>.
+</blockquote>
+<blockquote>
+  Because of that, the instance variable @a is an instance variable of obj, and the
+method bar( ) is called on obj( ).
+</blockquote>
+ <blockquote>- As bar() is executed, obj is still self <span class="quotes">(#FooBaar:0x00000001b787d8 3 )</span> (observe the 3 got printed), so @a is still an instance variable of obj.</blockquote>
+ <blockquote>
+  Finally, foo( ) returns a reference to self<span class="quotes">(#FooBaar:0x00000001b787d8 @a="hello world" )</span> and as expected the final value of the instance variable @a is "hello world".
+ </blockquote>
+<blockquote>  At the end the self is <strong>main</strong> again outside the scope of obj </blockquote>
+</ul>
+</p>
+
+
+<h1>Self</h1> <h4> With respect to classes and modules</h4>
+<p>
+Usually the role of self is taken by the last object who received a method
+call. However, in a class or module definition (and outside of any method), the role of self is taken by the class or module
+
+``` ruby self in classes/modules
+result = class MyClass
+    self
+end
+result # => MyClass
+
+```
+
+Let's look at one more example
+``` ruby ruby classes are objects
+class Foo
+    @a = 1
+    def self.read
+        @a
+    end
+    def write 
+        @a = 2
+    end
+    def read
+        @a
+    end
+end
+
+obj = Foo.new
+obj.write
+obj.read # => 2
+Foo.read # => 1
+
+```
+
+As we can see the previous code defines two instance variables. Both @a but they are defined in different scopes and they belong to different objects
+<br/><br/>
+<ul>
+<blockquote>
+    One @a is defined with obj as self, so it's an instance variable of obj object
+</blockquote>
+<blockquote>
+    The other @a is defined with Foo as self, so it's an instance variable of the Foo Object (Remember classes are nothing but objects in Ruby) 
+</blockquote>
+</ul>
+
+With the above concepts in mind we can build on and understand when exactly self is to be used and what does it refer to. There are many concepts which are built on the understanding of self like class_eval, class methods etc. We will look at them soon
+</p>
