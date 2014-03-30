@@ -49,10 +49,10 @@ Let's dissect it now. Following things have to be observed
 <br/>
 <ul> 
 <blockquote>
-    Outside the context of any class/module etc. self always refers to an object called as <strong>main</strong> created by Ruby for us
+    Outside the context of any class/module etc. self always refers to an object called as main created by Ruby for us
 </blockquote>
 <blockquote>
-    As soon as you call method foo, the receiver obj becomes self <p><span class="quotes">(#FooBaar:0x00000001b787d8 1 )</span>.
+    As soon as you call method foo, the receiver obj becomes self (#FooBaar:0x00000001b787d8 1 ).
 </blockquote>
 <blockquote>
   Because of that, the instance variable @a is an instance variable of obj, and the
